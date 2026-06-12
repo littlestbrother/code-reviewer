@@ -14,25 +14,47 @@ A modern, web-based visual git diff tool for reviewing code changes between comm
 
 ## Installation & Usage
 
-### Quick Start (Recommended)
+The tool ships as a single self-contained executable that bundles the server,
+the client, and the runtime — no `node`/`npm` install required on the target
+machine (only `git` needs to be on `PATH`). It's built with [Bun](https://bun.sh)
+(`bun build --compile`); the client is inlined into a single HTML document
+embedded in the binary.
 
-Run directly in any git repository:
-
-```bash
-npx @nerdo/code-reviewer
-```
-
-### Global Installation
+**Build it:**
 
 ```bash
-npm install -g @nerdo/code-reviewer
-code-reviewer
+bun install                            # first time only
+bun run build:binary                   # produces ./dist-binary/code-reviewer
+./dist-binary/code-reviewer            # run it from inside any git repo
 ```
+
+**Install it to your local user bin:**
+
+```bash
+bun run install:local
+```
+
+This builds the binary and installs it as `cr` in `~/.local/bin`. Make sure that
+directory is on your `PATH` (add `export PATH="$HOME/.local/bin:$PATH"` to your
+shell profile if needed), then run it from any git repository:
+
+```bash
+cr
+```
+
+To install somewhere else, set `INSTALL_DIR`:
+
+```bash
+INSTALL_DIR=/usr/local/bin bun run install:local
+```
+
+To cross-compile for another platform, add a Bun `--target`
+(e.g. `--target=bun-linux-x64`) to the `build:binary` script.
 
 ### Options
 
 ```bash
-npx @nerdo/code-reviewer [options]
+cr [options]
 
 Options:
   -p, --port <port>    Port to run on (default: 3001)
@@ -40,14 +62,14 @@ Options:
   --version           Show version
 
 Examples:
-  npx @nerdo/code-reviewer
-  npx @nerdo/code-reviewer --port 8080
+  cr
+  cr --port 8080
 ```
 
 ## How to Use
 
 1. **Navigate to a git repository** in your terminal
-2. **Run the command**: `npx @nerdo/code-reviewer`
+2. **Run the command**: `cr`
 3. **Your browser opens automatically** to the code review interface
 4. **Select what to compare**:
    - Choose FROM: branch, tag, or commit
@@ -78,20 +100,25 @@ Examples:
 
 ## Requirements
 
-- **Node.js**: Version 16 or higher
-- **Git**: Must be run from within a git repository
+- **Git**: Must be on `PATH` and run from within a git repository
 - **Browser**: Modern browser with JavaScript enabled
+- **[Bun](https://bun.sh)**: Required only to build the binary, not to run it
 
 ## Development
 
 ### Available Scripts
 
-- `npm run dev` - Start both client and server in development mode
-- `npm run test` - Run the test suite
-- `npm run test:watch` - Run tests in watch mode
-- `npm run lint` - Run ESLint
-- `npm run typecheck` - Run TypeScript type checking
-- `npm run build` - Build the production bundle
+This project uses [Bun](https://bun.sh) for dependency management and scripts.
+Run `bun install` to get started.
+
+- `bun run dev` - Start both client and server in development mode
+- `bun run test` - Run the test suite
+- `bun run test:watch` - Run tests in watch mode
+- `bun run lint` - Run ESLint
+- `bun run typecheck` - Run TypeScript type checking
+- `bun run build` - Build the production bundle
+- `bun run build:binary` - Build a standalone executable
+- `bun run install:local` - Build the binary and install it as `cr` in `~/.local/bin` (override dir with `INSTALL_DIR`)
 
 ### Project Structure
 
@@ -123,7 +150,7 @@ The project includes comprehensive tests for:
 
 Run tests with:
 ```bash
-npm test
+bun run test
 ```
 
 ## Technologies Used

@@ -29,6 +29,7 @@
   ],
   "exclude": [
     "src/server/**/*",
+    "src/binary.ts",
     "src/**/__tests__/**/*",
     "src/**/*.test.*",
     "node_modules",

@@ -27,20 +27,23 @@
     "dist"
   ],
   "scripts": {
-    "dev": "concurrently \"pnpm run server:dev\" \"pnpm run client:dev\"",
-    "server:dev": "nodemon",
+    "dev": "concurrently \"bun run server:dev\" \"bun run client:dev\"",
+    "server:dev": "NODE_ENV=development bun --watch src/server/index.ts",
     "client:dev": "vite",
-    "build": "pnpm run build:client && pnpm run build:server && pnpm run build:cli",
+    "build": "bun run build:client && bun run build:server && bun run build:cli",
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.server.json && tsc-alias -p tsconfig.server.json",
     "build:cli": "tsc -p tsconfig.cli.json && chmod +x dist/cli.js",
+    "build:binary:client": "BINARY_BUILD=1 vite build",
+    "build:binary": "bun run build:binary:client && bun build --compile --outfile dist-binary/code-reviewer ./src/binary.ts",
+    "install:local": "bun run build:binary && mkdir -p \"${INSTALL_DIR:-$HOME/.local/bin}\" && install -m 755 dist-binary/code-reviewer \"${INSTALL_DIR:-$HOME/.local/bin}/cr\" && echo \"Installed cr to ${INSTALL_DIR:-$HOME/.local/bin}\"",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run test && pnpm run lint && pnpm run build"
+    "prepublishOnly": "bun run test && bun run lint && bun run build"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.14",
@@ -85,14 +88,15 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "jsdom": "^26.1.0",
-    "nodemon": "^3.0.3",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
-    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
-    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
+    "vite-plugin-singlefile": "^2.3.3",
     "vitest": "^3.2.2"
-  }
+  },
+  "trustedDependencies": [
+    "esbuild"
+  ]
 }
