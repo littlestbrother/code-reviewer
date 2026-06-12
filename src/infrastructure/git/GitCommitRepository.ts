@@ -34,8 +34,13 @@ export class GitCommitRepository implements ICommitRepository {
     limit: number = 100
   ): Promise<Commit[]> {
     const git = this.getGit(repoPath);
-    const options = [`-${limit}`];
-    
+    const options: string[] = [];
+
+    // limit <= 0 means "all history" — omit the count flag entirely
+    if (limit > 0) {
+      options.push(`-${limit}`);
+    }
+
     if (branch) {
       options.push(branch);
     }
