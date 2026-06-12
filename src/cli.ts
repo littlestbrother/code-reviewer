@@ -5,7 +5,7 @@ import { join, dirname } from 'path';
 import * as fs from 'fs';
 
 const args = process.argv.slice(2);
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 49317;
 
 // Get the directory where the package is installed
 const packageDir = dirname(dirname(__filename));
@@ -20,7 +20,7 @@ Usage:
   npx @nerdo/code-reviewer [options]
 
 Options:
-  -p, --port <port>    Port to run on (default: 3001)
+  -p, --port <port>    Port to run on (default: 49317)
   -h, --help          Show this help message
   --version           Show version
 

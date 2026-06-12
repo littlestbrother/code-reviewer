@@ -21,7 +21,7 @@ Usage:
   cr [options]
 
 Options:
-  -p, --port <port>    Port to run on (default: 3001)
+  -p, --port <port>    Port to run on (default: 49317)
   -h, --help           Show this help message
   --version            Show version
 
@@ -30,7 +30,7 @@ Run it from within a git repository.
 `);
 }
 
-let port: string | number = process.env.PORT || 3001;
+let port: string | number = process.env.PORT || 49317;
 for (let i = 0; i < args.length; i++) {
   const arg = args[i];
 

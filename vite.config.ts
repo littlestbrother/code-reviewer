@@ -18,10 +18,10 @@ export default defineConfig({
     outDir: isBinary ? 'dist-binary' : 'dist',
   },
   server: {
-    port: 3000,
+    port: 49316,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:49317',
         changeOrigin: true,
       },
     },

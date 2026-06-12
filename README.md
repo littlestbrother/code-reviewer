@@ -57,7 +57,7 @@ To cross-compile for another platform, add a Bun `--target`
 cr [options]
 
 Options:
-  -p, --port <port>    Port to run on (default: 3001)
+  -p, --port <port>    Port to run on (default: 49317)
   -h, --help          Show help message
   --version           Show version
 
