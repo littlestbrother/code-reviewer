@@ -192,7 +192,7 @@ function App() {
       
       const [repoInfo, commitList] = await Promise.all([
         api.repository.getInfo(repoPath),
-        api.commits.list(repoPath, undefined, 50)
+        api.commits.list(repoPath, undefined, 0)
       ]);
       
       setRepository(repoInfo);
@@ -214,7 +214,7 @@ function App() {
     if (!repository || branchCommits[branch]) return;
     
     try {
-      const commits = await api.commits.list(repoPath, branch, 100);
+      const commits = await api.commits.list(repoPath, branch, 0);
       setBranchCommits(prev => ({ ...prev, [branch]: commits }));
     } catch (err) {
       console.error(`Failed to load commits for branch ${branch}:`, err);
