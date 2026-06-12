@@ -22,7 +22,7 @@ const defaultSettings: Settings = {
   theme: "system",
   lineHeight: 1.5,
   tabSize: 4,
-  defaultViewMode: 'side-by-side',
+  defaultViewMode: 'inline',
   defaultHighlighterEnabled: false,
   defaultLinkHighlights: true,
   defaultLinkMode: 'line-number',

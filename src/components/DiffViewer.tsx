@@ -231,7 +231,7 @@ function UnchangedFileView({ diff, highlighterEnabled, highlightedLines, setHigh
 
   return (
     <ScrollArea className="h-full">
-      <div className="bg-muted px-4 py-2 font-semibold border-b">
+      <div className="bg-muted px-4 py-2 font-semibold border-b sticky top-0 z-20">
         {getFilenameDisplay(diff)}
       </div>
       <div className="font-mono text-sm" style={{ lineHeight: settings.lineHeight }}>
@@ -398,7 +398,7 @@ function InlineDiffView({ diff, highlighterEnabled, highlightedLines, setHighlig
 
   return (
     <ScrollArea className="h-full min-h-0">
-      <div className="bg-muted px-4 py-2 font-semibold border-b">
+      <div className="bg-muted px-4 py-2 font-semibold border-b sticky top-0 z-20">
         {getFilenameDisplay(diff)}
       </div>
       <div className="font-mono text-sm" style={{ lineHeight: settings.lineHeight }}>
